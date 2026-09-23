@@ -1,0 +1,7 @@
+project_id = "SpotInfo"
+
+# Only these explicitly declared properties are managed by config push.
+# OAuth credentials and email-verification settings are NOT stored here.
+[auth]
+site_url = "https://hiro-mochian.github.io/SpotInfo/"
+additional_redirect_urls = ["https://hiro-mochian.github.io/SpotInfo/"]

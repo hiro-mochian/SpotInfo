@@ -1,0 +1,117 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "IBM Plex Sans JP", "Hiragino Sans", sans-serif;
+  --font-display: "Shippori Mincho", "Noto Serif JP", serif;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+:root {
+  --primary: #1c2430;
+  --primary-foreground: #fbf7ee;
+  --sidebar-primary: #de6848;
+  --sidebar-primary-foreground: #fffaf3;
+  --chart-1: #de6848;
+  --chart-2: #1c2430;
+  --chart-3: #7c7468;
+  --chart-4: #c45336;
+  --chart-5: #eadfcd;
+  --radius: 0.125rem;
+  --background: #f3eee4;
+  --foreground: #1c2430;
+  --card: #fbf7ee;
+  --card-foreground: #1c2430;
+  --popover: #fbf7ee;
+  --popover-foreground: #1c2430;
+  --secondary: #efe6d4;
+  --secondary-foreground: #1c2430;
+  --muted: #efe6d4;
+  --muted-foreground: #5b6470;
+  --accent: #efe6d4;
+  --accent-foreground: #1c2430;
+  --destructive: #c45336;
+  --destructive-foreground: #fffaf3;
+  --border: #d5ccbc;
+  --input: #d5ccbc;
+  --ring: #de6848;
+  --sidebar: #fbf7ee;
+  --sidebar-foreground: #1c2430;
+  --sidebar-accent: #efe6d4;
+  --sidebar-accent-foreground: #1c2430;
+  --sidebar-border: #d5ccbc;
+  --sidebar-ring: #de6848;
+  --font-sans: "IBM Plex Sans JP", "Hiragino Sans", sans-serif;
+  --font-display: "Shippori Mincho", "Noto Serif JP", serif;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+  }
+}
+
+html {scroll-behavior:smooth;scroll-padding-top:6rem;}
+body {margin:0;min-width:320px;}
+button,a,input,textarea {touch-action:manipulation;}
+button {cursor:pointer;}
+button:disabled {cursor:not-allowed;}
+:focus-visible {outline:2px solid var(--ring);outline-offset:3px;}
+#atlas {scroll-margin-top:5rem;}
+.leaflet-container {background:#e7dcc8;font-family:var(--font-sans);z-index:0;}
+.leaflet-control-attribution {font-size:10px;max-width:85%;}
+.leaflet-control-zoom {margin-top:5rem!important;}
+.spot-pin {display:block;width:16px;height:16px;margin:2px;background:#de6848;border:2px solid #fffaf3;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 1px 4px #1c243055;}
+.spot-pin.is-selected {width:21px;height:21px;background:#1c2430;}
+.map-view {height:640px;}
+.configuration-banner {padding:1rem;background:var(--secondary);border-bottom:1px solid var(--border);font-size:.875rem;}
+.dialog-overlay {position:fixed;inset:0;background:#1c243055;z-index:2000;}
+.dialog-content {position:fixed;z-index:2001;left:50%;top:50%;transform:translate(-50%,-50%);width:calc(100% - 2rem);max-width:32rem;max-height:90dvh;overflow:auto;background:var(--card);border:1px solid var(--border);padding:1.5rem;box-shadow:0 20px 60px #1c243022;}
+.dialog-header {display:flex;justify-content:space-between;gap:1rem;margin-bottom:1rem;}
+.dialog-header h2 {font-size:1.5rem;}
+.dialog-header p,.migration-note,.help-text {font-size:.875rem;color:var(--muted-foreground);line-height:1.7;}
+.dialog-close {align-self:start;font-size:1.5rem;padding:0 .5rem;}
+.dialog-actions-stack {display:grid;gap:1rem;margin-top:1rem;}
+.button {display:inline-flex;align-items:center;justify-content:center;padding:.7rem 1rem;min-height:44px;}
+.button-primary {background:var(--primary);color:var(--primary-foreground);}
+.form-grid {display:grid;gap:1rem;margin-top:1rem;}
+.form-grid label {display:grid;gap:.3rem;font-size:.875rem;}
+.form-grid input {padding:.6rem;border:1px solid var(--border);min-width:0;}
+.form-error {color:#a33f29;font-size:.875rem;}
+.form-success {color:var(--foreground);font-size:.875rem;}
+.inline-actions {display:flex;gap:1rem;justify-content:space-between;font-size:.8rem;}
+.text-button {text-decoration:underline;}
+@media(max-width:640px){.map-view{height:500px;}.leaflet-control-attribution{font-size:9px;}h1{overflow-wrap:anywhere;}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}*,*::before,*::after{transition:none!important;}}
