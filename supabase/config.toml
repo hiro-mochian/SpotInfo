@@ -5,3 +5,8 @@ project_id = "SpotInfo"
 [auth]
 site_url = "https://hiro-mochian.github.io/SpotInfo/"
 additional_redirect_urls = ["https://hiro-mochian.github.io/SpotInfo/"]
+
+# Gateway verification is replaced by mandatory auth.getUser() inside this function.
+# Requests without a verified user are rejected before any binding operation.
+[functions.verify-login]
+verify_jwt = false

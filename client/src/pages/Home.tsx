@@ -36,10 +36,10 @@ const copy = {
     heroTitle: "あなたの「ここ、いいよ」を",
     heroTitleLine: "地図に残そう。",
     heroBody:
-      "誰でも見つけて、誰でも書き込める。旅先の小さな発見から、暮らしの中の頼れる場所まで、みんなで育てるオープンなスポット地図です。",
+      "誰でも見つけて、Googleでログインして書き込める。旅先の小さな発見から、暮らしの中の頼れる場所まで、みんなで育てるオープンなスポット地図です。",
     openAtlas: "地図帳をひらく",
     leaveSpot: "新しいスポットを残す",
-    honestCount: (n: number) => `公開 ${n}件 · 誰でも残せる`,
+    honestCount: (n: number) => `公開 ${n}件 · Googleでログインして投稿`,
     mapTitle: "いま、みんなが残した場所",
     searchLabel: "地図上の地名・施設を検索",
     searchPlaceholder: "例：浅草寺、東京国立博物館、渋谷",
@@ -57,7 +57,7 @@ const copy = {
     howConnect: "つなぐ",
     howConnectBody: "次の誰かの旅や暮らしのヒントになる。",
     footer: "Spot は、身近な発見を静かに共有するためのオープンな場所です。",
-    year: "2026 / open to all",
+    year: "2026 / shared atlas",
     formTitle: "新しいスポットを残す",
     formBody: "地図をクリックすると、位置が入ります。",
     name: "スポット名",
@@ -82,10 +82,10 @@ const copy = {
     heroTitle: "Leave your “this is good”",
     heroTitleLine: "on the map.",
     heroBody:
-      "Anyone can find a place. Anyone can leave a note. A shared atlas for small discoveries — on a trip, or around the corner.",
+      "Anyone can find a place. Sign in with Google to leave a note. A shared atlas for small discoveries — on a trip, or around the corner.",
     openAtlas: "Open the atlas",
     leaveSpot: "Leave a new spot",
-    honestCount: (n: number) => `${n} public · anyone can leave one`,
+    honestCount: (n: number) => `${n} public · sign in with Google to contribute`,
     mapTitle: "Places people have left",
     searchLabel: "Search places on the map",
     searchPlaceholder: "e.g. Senso-ji, Ueno Park, Shibuya",
@@ -103,7 +103,7 @@ const copy = {
     howConnect: "Connect",
     howConnectBody: "A small discovery becomes someone else’s next step.",
     footer: "Spot is a quiet, open place for nearby discoveries.",
-    year: "2026 / open to all",
+    year: "2026 / shared atlas",
     formTitle: "Leave a new spot",
     formBody: "Click the map to set the location.",
     name: "Name",
@@ -194,10 +194,12 @@ export default function Home() {
     setSelectedId(spot.id);
     mapRef.current?.panTo([spot.lat, spot.lng]);
   }, []);
+  const openSpotForm = () => { if (!isAuthenticated) { startLogin(); return; } setFormOpen(true); };
   const onMapClick = useCallback((point: {lat: number; lng: number}) => {
+    if (!isAuthenticated) { startLogin(); return; }
     setDraft(current => ({...current, lat: point.lat.toFixed(6), lng: point.lng.toFixed(6)}));
     setFormOpen(true);
-  }, []);
+  }, [isAuthenticated]);
   const searchPlace = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!placeQuery.trim() || searchPending) return;
@@ -235,7 +237,7 @@ export default function Home() {
             <a href="#atlas" className="hover:text-foreground">
               {t.explore}
             </a>
-            <button type="button" className="hover:text-foreground" onClick={() => setFormOpen(true)}>
+            <button type="button" className="hover:text-foreground" onClick={openSpotForm}>
               {t.save}
             </button>
             <a href="#connect" className="hover:text-foreground">
@@ -294,7 +296,7 @@ export default function Home() {
             <Button asChild className="rounded-none px-5">
               <a href="#atlas">{t.openAtlas}</a>
             </Button>
-            <Button variant="outline" className="rounded-none bg-transparent" onClick={() => setFormOpen(true)}>
+            <Button variant="outline" className="rounded-none bg-transparent" onClick={openSpotForm}>
               {t.leaveSpot}
             </Button>
           </div>
@@ -481,7 +483,7 @@ export default function Home() {
 
       <footer className="mx-auto flex max-w-6xl flex-col gap-3 border-t border-foreground px-4 py-8 text-sm text-muted-foreground sm:flex-row sm:justify-between">
         <p>{t.footer}</p>
-        <p>{t.year}</p>
+        <p>{t.year} · <Link href="/admin" className="underline underline-offset-4">{lang === "ja" ? "管理者" : "Admin"}</Link></p>
       </footer>
 
       <Dialog open={formOpen} onOpenChange={setFormOpen}>
@@ -536,7 +538,7 @@ export default function Home() {
               />
             </div>
             <p className="text-xs text-muted-foreground">{draft.lat}, {draft.lng}</p>
-            {!isAuthenticated ? <p className="text-xs text-muted-foreground">{lang === "ja" ? "ゲスト投稿は公開され、後から編集・削除できません。編集したい場合は先にログインしてください。" : "Guest posts are public and cannot be edited or deleted later. Log in first to manage your spots."}</p> : null}
+            {!isAuthenticated ? <p className="text-xs text-muted-foreground">{lang === "ja" ? "投稿するにはGoogleでログインしてください。" : "Sign in with Google to create and manage your spots."}</p> : null}
             <div className="flex justify-end gap-2">
               <Button
                 type="button"
@@ -549,7 +551,7 @@ export default function Home() {
               <Button
                 type="submit"
                 className="rounded-none bg-[#de6848] text-white hover:bg-[#c45336]"
-                disabled={createMutation.isPending}
+                disabled={createMutation.isPending || !isAuthenticated}
               >
                 {t.saveAction}
               </Button>

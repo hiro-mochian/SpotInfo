@@ -3,7 +3,6 @@ const configuredKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim() ?? "
 
 export const supabaseUrl = configuredUrl;
 export const supabasePublishableKey = configuredKey;
-export const authMode = import.meta.env.VITE_AUTH_MODE === "email" ? "email" : "github";
 export const isSupabaseConfigured = Boolean(configuredUrl && configuredKey && !configuredKey.startsWith('sb_secret_'));
 
 export function configurationMessage(): string {

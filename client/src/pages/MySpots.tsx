@@ -92,7 +92,7 @@ export default function MySpots() {
         </p>
 
         {mineQuery.isError ? <p role="alert" className="mt-6">読み込めませんでした。<button onClick={() => void mineQuery.refetch()}>再試行</button></p> : null}
-        {!loading && !isAuthenticated ? <div className="mt-8 border border-border p-6"><p>ログインすると、自分のスポットを確認できます。</p><Button onClick={() => startLogin()}>ログイン</Button></div> : null}
+        {!loading && !isAuthenticated ? <div className="mt-8 border border-border p-6"><p>Googleでログインすると、自分のスポットを確認できます。</p><Button onClick={() => startLogin()}>Googleでログイン</Button></div> : null}
         {isAuthenticated && (mineQuery.isLoading ? (
           <p className="mt-10 text-sm text-muted-foreground">読み込み中…</p>
         ) : spots.length === 0 ? (

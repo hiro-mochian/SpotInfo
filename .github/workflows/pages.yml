@@ -23,7 +23,6 @@ jobs:
     env:
       VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
       VITE_SUPABASE_PUBLISHABLE_KEY: ${{ vars.VITE_SUPABASE_PUBLISHABLE_KEY }}
-      VITE_AUTH_MODE: github
       VITE_BASE_PATH: /SpotInfo/
     steps:
       - uses: actions/checkout@v6
@@ -37,6 +36,7 @@ jobs:
       - name: Require live data API and enabled login provider
         run: node scripts/check-deployment.mjs
       - run: npm run build
+      - run: npm run check:independence
       - uses: actions/upload-pages-artifact@v4
         with:
           path: dist
