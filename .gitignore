@@ -1,0 +1,26 @@
+# Credentials and local environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+
+# Dependencies and build output
+node_modules/
+dist/
+build/
+coverage/
+.vite/
+.vercel/
+.netlify/
+*.tsbuildinfo
+
+# Local files
+.DS_Store
+*.log
+*.zip
+__pycache__/
+*.pyc

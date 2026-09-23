@@ -1,0 +1,84 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "IBM Plex Sans JP", "Hiragino Sans", sans-serif;
+  --font-display: "Shippori Mincho", "Noto Serif JP", serif;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+:root {
+  --primary: #1c2430;
+  --primary-foreground: #fbf7ee;
+  --sidebar-primary: #de6848;
+  --sidebar-primary-foreground: #fffaf3;
+  --chart-1: #de6848;
+  --chart-2: #1c2430;
+  --chart-3: #7c7468;
+  --chart-4: #c45336;
+  --chart-5: #eadfcd;
+  --radius: 0.125rem;
+  --background: #f3eee4;
+  --foreground: #1c2430;
+  --card: #fbf7ee;
+  --card-foreground: #1c2430;
+  --popover: #fbf7ee;
+  --popover-foreground: #1c2430;
+  --secondary: #efe6d4;
+  --secondary-foreground: #1c2430;
+  --muted: #efe6d4;
+  --muted-foreground: #5b6470;
+  --accent: #efe6d4;
+  --accent-foreground: #1c2430;
+  --destructive: #c45336;
+  --destructive-foreground: #fffaf3;
+  --border: #d5ccbc;
+  --input: #d5ccbc;
+  --ring: #de6848;
+  --sidebar: #fbf7ee;
+  --sidebar-foreground: #1c2430;
+  --sidebar-accent: #efe6d4;
+  --sidebar-accent-foreground: #1c2430;
+  --sidebar-border: #d5ccbc;
+  --sidebar-ring: #de6848;
+  --font-sans: "IBM Plex Sans JP", "Hiragino Sans", sans-serif;
+  --font-display: "Shippori Mincho", "Noto Serif JP", serif;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+  }
+}
