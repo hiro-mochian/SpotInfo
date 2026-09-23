@@ -1,3 +1,4 @@
+import {APP_NAME, RELEASE} from "@/lib/release";
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {useQuery} from '@tanstack/react-query';
@@ -10,7 +11,7 @@ export default function Admin(){
  const summary=useQuery({queryKey:['admin-summary',session?.user.id,access.provider],enabled:access.canAdmin,queryFn:async()=>{const {data,error}=await requireSupabase().rpc('admin_summary');if(error)throw error;return data as {role:string;spot_count:number;unassigned_legacy_count:number};}});
  async function login(){setPending(true);setMessage(null);try{await signInWithGithub();}catch(e){setMessage(e instanceof Error?e.message:'ログインを開始できませんでした。');setPending(false);}}
  return <div className="min-h-screen bg-background text-foreground">
-  <header className="border-b border-border"><div className="mx-auto max-w-3xl p-4 flex justify-between items-center"><Link to="/" className="text-2xl font-[family-name:var(--font-display)]">Spot</Link><Link to="/" className="text-sm underline">地図帳へ戻る</Link></div></header>
+  <header className="border-b border-border"><div className="mx-auto max-w-3xl p-4 flex justify-between items-center"><Link to="/" className="text-2xl font-[family-name:var(--font-display)]">{APP_NAME}<span className="block text-[10px] tracking-widest font-sans text-muted-foreground">{RELEASE}</span></Link><Link to="/" className="text-sm underline">地図帳へ戻る</Link></div></header>
   <main className="mx-auto max-w-3xl px-4 py-12">
    <p className="text-xs tracking-widest text-[#c45336]">ADMINISTRATION</p><h1 className="mt-2 text-4xl">オーナー・管理者</h1>
    <p className="mt-4 text-muted-foreground">この画面は、事前に許可されたGitHubアカウントだけが利用できます。Googleでの利用者ログインでは管理権限を取得できません。</p>

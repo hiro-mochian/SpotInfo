@@ -1,10 +1,10 @@
-name: Publish Spot to GitHub Pages
+name: Publish Spot_Info to GitHub Pages
 
 on:
   workflow_dispatch:
     inputs:
       confirm_publication:
-        description: 'Publish the tested Spot website publicly (OAuth setup must be complete)'
+        description: 'Publish the tested Spot_Info website publicly (OAuth setup must be complete)'
         type: boolean
         required: true
         default: false

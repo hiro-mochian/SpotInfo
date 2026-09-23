@@ -1,0 +1,14 @@
+{
+  "product": "Spot_Info",
+  "version": 1,
+  "revision": 1,
+  "release": "V01R01",
+  "baseline": true,
+  "gitTag": "V01R01",
+  "publicUrl": "https://hiro-mochian.github.io/SpotInfo/",
+  "publicationStatusAtBaseline": "blocked_pending_oauth_and_owner_approval",
+  "auth": {
+    "members": "google",
+    "staff": "approved_github"
+  }
+}

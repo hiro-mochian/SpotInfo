@@ -1,3 +1,4 @@
+import {APP_NAME, RELEASE} from "@/lib/release";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import {
@@ -68,7 +69,7 @@ export default function MySpots() {
       <header className="sticky top-0 z-20 border-b border-border bg-background/90 backdrop-blur">
         <div className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-4 py-4">
           <Link href="/" className="text-2xl tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
-            Spot
+            {APP_NAME}<span className="block text-[10px] tracking-widest font-sans text-muted-foreground">{RELEASE}</span>
           </Link>
           <nav className="flex items-center gap-4 text-sm">
             <Link href="/" className="text-muted-foreground hover:text-foreground">

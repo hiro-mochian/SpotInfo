@@ -1,3 +1,4 @@
+import {APP_NAME, RELEASE} from "@/lib/release";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,7 +26,7 @@ const TOKYO_CENTER = { lat: 35.6812, lng: 139.7671 };
 
 const copy = {
   ja: {
-    brand: "Spot",
+    brand: APP_NAME,
     explore: "見つける",
     save: "残す",
     connect: "つなぐ",
@@ -56,7 +57,7 @@ const copy = {
     howSaveBody: "場所をクリックして、説明やメモを登録する。",
     howConnect: "つなぐ",
     howConnectBody: "次の誰かの旅や暮らしのヒントになる。",
-    footer: "Spot は、身近な発見を静かに共有するためのオープンな場所です。",
+    footer: "Spot_Info は、身近な発見を静かに共有するためのオープンな場所です。",
     year: "2026 / shared atlas",
     formTitle: "新しいスポットを残す",
     formBody: "地図をクリックすると、位置が入ります。",
@@ -71,7 +72,7 @@ const copy = {
     mine: "マイスポット",
   },
   en: {
-    brand: "Spot",
+    brand: APP_NAME,
     explore: "Find",
     save: "Leave",
     connect: "Connect",
@@ -102,7 +103,7 @@ const copy = {
     howSaveBody: "Click a place and leave a short note.",
     howConnect: "Connect",
     howConnectBody: "A small discovery becomes someone else’s next step.",
-    footer: "Spot is a quiet, open place for nearby discoveries.",
+    footer: "Spot_Info is a quiet, open place for nearby discoveries.",
     year: "2026 / shared atlas",
     formTitle: "Leave a new spot",
     formBody: "Click the map to set the location.",
@@ -231,7 +232,7 @@ export default function Home() {
       <header className="sticky top-0 z-20 border-b border-border bg-background/90 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4">
           <a href="#top" className="text-2xl tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
-            {t.brand}
+            {t.brand}<span className="block text-[10px] tracking-widest font-sans text-muted-foreground">{RELEASE}</span>
           </a>
           <nav className="hidden items-center gap-7 text-sm text-muted-foreground sm:flex">
             <a href="#atlas" className="hover:text-foreground">
@@ -483,7 +484,7 @@ export default function Home() {
 
       <footer className="mx-auto flex max-w-6xl flex-col gap-3 border-t border-foreground px-4 py-8 text-sm text-muted-foreground sm:flex-row sm:justify-between">
         <p>{t.footer}</p>
-        <p>{t.year} · <Link href="/admin" className="underline underline-offset-4">{lang === "ja" ? "管理者" : "Admin"}</Link></p>
+        <p>{RELEASE} · {t.year} · <Link href="/admin" className="underline underline-offset-4">{lang === "ja" ? "管理者" : "Admin"}</Link></p>
       </footer>
 
       <Dialog open={formOpen} onOpenChange={setFormOpen}>
