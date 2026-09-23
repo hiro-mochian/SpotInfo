@@ -21,6 +21,7 @@ function Content(){
  useEffect(()=>{if(access.canPost)setLoginOpen(false);},[access.canPost]);
  const message=configurationMessage();
  return <>
+  {import.meta.env.VITE_PREVIEW_RELEASE==='true'?<aside className="configuration-banner" role="status"><strong>V01R01 先行公開</strong> — 地図を閲覧できます。Googleログインはテスト設定中、GitHub管理者認証は本人確認待ちです。</aside>:null}
   {message?<div className="configuration-banner" role="alert"><strong>移行先の設定が必要です。</strong> {message}</div>:null}
   {authError?<div className="configuration-banner" role="alert">{authError}</div>:null}
   <Routes>

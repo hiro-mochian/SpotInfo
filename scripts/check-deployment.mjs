@@ -19,5 +19,8 @@ if(others.length)missing.push(`disable other sign-in providers: ${others.join(',
 if(!policy.owner_configured)missing.push('approved GitHub owner allowlist');
 const edge=await fetch(`${url}/functions/v1/verify-login`,{method:'POST',headers,body:'{}',signal:AbortSignal.timeout(20000)});
 if(edge.status!==401)missing.push('provider verification API must reject unauthenticated requests');
-if(missing.length)throw new Error(`Publication blocked: ${missing.join(', ')}.`);
-console.log('Google members and allowlisted GitHub staff are configured. Real-provider browser sign-in is still an acceptance step.');
+if(missing.length){
+ const previewAllowed=process.env.ALLOW_INCOMPLETE_OAUTH==='true'&&missing.every(x=>x==='GitHub OAuth'||x==='disable other sign-in providers: email');
+ if(!previewAllowed)throw new Error(`Publication blocked: ${missing.join(', ')}.`);
+ console.warn(`User-requested preview release. Pending: ${missing.join(', ')}. DB provider separation, owner allowlist and unauthenticated denial remain mandatory.`);
+}else console.log('Google members and allowlisted GitHub staff are configured. Real-provider browser sign-in is still an acceptance step.');

@@ -59,6 +59,7 @@ const copy = {
     howConnectBody: "次の誰かの旅や暮らしのヒントになる。",
     footer: "Spot_Info は、身近な発見を静かに共有するためのオープンな場所です。",
     year: "2026 / shared atlas",
+    privacy: "プライバシーポリシー",
     formTitle: "新しいスポットを残す",
     formBody: "地図をクリックすると、位置が入ります。",
     name: "スポット名",
@@ -105,6 +106,7 @@ const copy = {
     howConnectBody: "A small discovery becomes someone else’s next step.",
     footer: "Spot_Info is a quiet, open place for nearby discoveries.",
     year: "2026 / shared atlas",
+    privacy: "Privacy policy",
     formTitle: "Leave a new spot",
     formBody: "Click the map to set the location.",
     name: "Name",
@@ -484,7 +486,7 @@ export default function Home() {
 
       <footer className="mx-auto flex max-w-6xl flex-col gap-3 border-t border-foreground px-4 py-8 text-sm text-muted-foreground sm:flex-row sm:justify-between">
         <p>{t.footer}</p>
-        <p>{RELEASE} · {t.year} · <Link href="/admin" className="underline underline-offset-4">{lang === "ja" ? "管理者" : "Admin"}</Link></p>
+        <p>{RELEASE} · {t.year} · <a href={`${import.meta.env.BASE_URL}privacy/`} className="underline underline-offset-4">{t.privacy}</a> · <Link href="/admin" className="underline underline-offset-4">{lang === "ja" ? "管理者" : "Admin"}</Link></p>
       </footer>
 
       <Dialog open={formOpen} onOpenChange={setFormOpen}>

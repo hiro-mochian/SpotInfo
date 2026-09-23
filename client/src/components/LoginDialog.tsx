@@ -12,5 +12,6 @@ export function LoginDialog({open,onOpenChange}:{open:boolean;onOpenChange:(open
   {message||error?<p className="form-error" role="alert">{message||error}</p>:null}
   <div className="dialog-actions-stack"><button className="button button-primary" type="button" disabled={!configured||pending} onClick={()=>void login()}>{pending?'Googleを開いています…':'Googleでログイン'}</button></div>
   <p className="help-text mt-3">取得するのは本人識別に必要なプロフィールとメールアドレスだけです。</p>
+  <p className="help-text mt-3"><a href={`${import.meta.env.BASE_URL}privacy/`} className="text-button">プライバシーポリシー</a></p>
  </Dialog>;
 }

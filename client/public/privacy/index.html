@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f3eee4" />
+    <title>Spot_Info プライバシーポリシー</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --cream: #f3eee4;
+        --paper: #fbf7ee;
+        --navy: #1c2430;
+        --muted: #5b6470;
+        --border: #d5ccbc;
+        --coral: #de6848;
+        --coral-dark: #c45336;
+      }
+
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        min-width: 320px;
+        margin: 0;
+        background: var(--cream);
+        color: var(--navy);
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      a { color: inherit; }
+
+      a:focus-visible {
+        outline: 3px solid var(--coral);
+        outline-offset: 4px;
+      }
+
+      .site-header {
+        border-bottom: 1px solid var(--border);
+        background: rgba(243, 238, 228, 0.94);
+      }
+
+      .header-inner,
+      .page {
+        width: min(100% - 2rem, 840px);
+        margin: 0 auto;
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1rem 0;
+      }
+
+      .brand {
+        color: var(--navy);
+        font-family: Georgia, "Hiragino Mincho ProN", "Yu Mincho", serif;
+        font-size: 1.35rem;
+        line-height: 1.1;
+        text-decoration: none;
+      }
+
+      .back-link {
+        color: var(--muted);
+        font-size: 0.88rem;
+        text-decoration: underline;
+        text-decoration-color: var(--coral);
+        text-decoration-thickness: 1px;
+        text-underline-offset: 0.28em;
+      }
+
+      .back-link:hover { color: var(--coral-dark); }
+
+      .page { padding: clamp(3rem, 8vw, 6rem) 0 4rem; }
+
+      .policy {
+        border: 1px solid var(--border);
+        background: var(--paper);
+        box-shadow: 0 18px 40px rgba(28, 36, 48, 0.07);
+        padding: clamp(1.5rem, 5vw, 4rem);
+      }
+
+      h1,
+      h2 {
+        font-family: Georgia, "Hiragino Mincho ProN", "Yu Mincho", serif;
+        font-weight: 400;
+      }
+
+      h1 {
+        max-width: 15em;
+        margin: 0;
+        font-size: clamp(2rem, 6vw, 3.25rem);
+        letter-spacing: -0.025em;
+        line-height: 1.25;
+      }
+
+      .rule {
+        width: 3.25rem;
+        height: 2px;
+        margin: 2rem 0 1.85rem;
+        border: 0;
+        background: var(--coral);
+      }
+
+      h2 {
+        margin: 2.4rem 0 0.75rem;
+        font-size: clamp(1.35rem, 3vw, 1.7rem);
+        line-height: 1.45;
+      }
+
+      p { margin: 0 0 1.1rem; }
+
+      h2 + p { margin-top: 0; }
+
+      .lead {
+        color: var(--muted);
+        font-size: 0.96rem;
+      }
+
+      strong { font-weight: 700; }
+
+      @media (max-width: 480px) {
+        .header-inner { align-items: flex-start; }
+        .back-link { padding-top: 0.18rem; }
+        .policy { padding: 1.4rem; }
+        body { line-height: 1.8; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="../" aria-label="Spot_Info の地図帳へ戻る">Spot_Info</a>
+        <a class="back-link" href="../">地図帳へ戻る</a>
+      </div>
+    </header>
+
+    <main class="page">
+      <article class="policy" aria-labelledby="policy-title">
+        <h1 id="policy-title">Spot_Info プライバシーポリシー</h1>
+        <hr class="rule" />
+        <p class="lead">最終更新：2026年9月23日。運営者：hiro-mochian。お問い合わせ窓口：<strong>hiro.mochian@gmail.com</strong>。</p>
+
+        <h2>取得する情報と利用目的</h2>
+        <p>Spot_Infoは、身近なスポットを地図で共有するサービスです。公開スポットの閲覧にログインは必要ありません。登録・投稿・自分の投稿の編集と削除にはGoogle認証を使用します。管理者の本人確認にはGitHub認証を使用します。</p>
+        <p>Google認証では、Googleの利用者識別子、メールアドレス、表示名、プロフィール画像など、Googleが提供する基本プロフィールを取得します。GitHub認証では、GitHubの数値ID、ユーザー名、メールアドレスなどの基本プロフィールを取得します。これらは本人確認、ログインの維持、投稿の所有者確認、不正な操作の防止に使用します。Gmail本文、Google Driveのファイル、連絡先、GitHubリポジトリの内容は取得しません。</p>
+        <p>利用者が入力するスポット名、エリア、分類、メモ、位置情報、投稿日時を保存します。サービスの安全な提供のため、認証状態やアクセスに関する技術情報を基盤サービスが処理する場合があります。</p>
+
+        <h2>公開される情報</h2>
+        <p>スポットの投稿内容と位置情報は一般公開されます。公開APIからアカウントのメールアドレスや所有者の内部IDは返しません。ただし、投稿本文に書いた個人情報はそのまま公開されるため、自宅の位置、個人の連絡先、他人の非公開情報などを入力しないでください。</p>
+
+        <h2>利用する外部サービス</h2>
+        <p>サイトの配信にはGitHub Pages、認証セッションとデータ保存にはSupabaseを使用します。GoogleとGitHubはそれぞれの認証を処理します。各提供者の設備でデータが取り扱われ、国外の設備が使われる場合もあります。</p>
+        <p>地図はOpenStreetMapのタイルを取得します。地名検索を実行すると、入力した検索語がPhotonへ送信されます。フォントの表示にはGoogle Fontsを使用します。これらの通信先には、通常の通信情報としてIPアドレスやブラウザに関する情報が伝わる場合があります。</p>
+        <p>本サイトには、取得したGoogle利用者データを広告目的で販売する処理や、生成AIの学習に利用する処理を設けません。サイトの実行にManusの認証、API、ホスティングは使用しません。</p>
+
+        <h2>ブラウザ保存と安全管理</h2>
+        <p>ログインを維持するため、認証SDKはブラウザの保存領域を使用します。認証先やログイン後の戻り先も一時的に保存します。共有端末では利用後にログアウトしてください。</p>
+        <p>認証元検証APIは、GoogleまたはGitHubにトークンを提示して本人を確認します。このAPIはプロバイダーのトークンをDBやアプリケーションログへ保存しません。セッションと認証元の一致を確認してから権限を付与し、Googleセッションで管理権限を使えないよう分離します。</p>
+        <p>通信にはHTTPSを使用します。権限確認と所有者の照合を行いますが、インターネット上のすべての危険を完全に排除できると保証するものではありません。</p>
+
+        <h2>保管と削除</h2>
+        <p>アカウントと投稿の情報は、サービスの提供と安全な運用に必要な間、保存します。保存期間を一律の日数で自動削除する機能は設けていません。公開投稿は、自分の投稿一覧から本人が削除できます。</p>
+        <p>退会やアカウント情報の削除は、上記の窓口へご連絡ください。運営者が本人確認のうえ対応します。バックアップや基盤サービスのログからの消去は、各サービスの保持期間・仕組みに従う場合があります。公開済みの投稿が第三者に保存された場合、その複製まで削除できるとは限りません。</p>
+        <p>GoogleまたはGitHub側でアプリへのアクセス許可を取り消すこともできます。ただし、許可の取消しだけでは本サービスに保存されたアカウントや投稿は削除されません。</p>
+
+        <h2>変更について</h2>
+        <p>情報の利用方法を変更する場合は、本ページなど分かりやすい場所で告知します。Google利用者データの新しい利用目的や追加の取得範囲が生じる場合には、必要な説明と同意を得てから変更します。</p>
+      </article>
+    </main>
+  </body>
+</html>

@@ -21,6 +21,7 @@ export default function Admin(){
     {access.provider==='google'?<p className="help-text mb-4">現在はGoogleでログインしています。管理者として続けるにはGitHubでログインし直してください。</p>:null}
     <button className="button button-primary" disabled={!configured||pending} onClick={()=>void login()}>{pending?'GitHubを開いています…':'GitHubで管理者ログイン'}</button>
     <p className="help-text mt-4">ログインしただけでは管理者になりません。一般利用者の登録・投稿はGoogle認証をご利用ください。</p>
+    <p className="help-text mt-3"><a href={`${import.meta.env.BASE_URL}privacy/`} className="text-button">プライバシーポリシー</a></p>
    </section>:null}
    {message||error?<p className="form-error mt-4" role="alert">{message||error}</p>:null}
    {access.canAdmin?<section className="mt-8 border border-border bg-card p-6">
