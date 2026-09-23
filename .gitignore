@@ -24,3 +24,7 @@ coverage/
 *.zip
 __pycache__/
 *.pyc
+
+# Supabase CLI local project linkage (not application source)
+supabase/.temp/
+supabase/.branches/
