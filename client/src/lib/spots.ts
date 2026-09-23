@@ -1,5 +1,5 @@
 export type Spot = {
-  id: number;
+  id: string;
   name: string;
   area: string;
   category: string;
@@ -21,10 +21,7 @@ export function filterAndSortSpots(spots: Spot[], category: string, query: strin
   const needle = query.trim().toLocaleLowerCase();
   return spots
     .filter((spot) => category === "all" || spot.category === category)
-    .filter((spot) => {
-      if (!needle) return true;
-      return `${spot.name}${spot.area}${spot.category}${spot.note}`.toLocaleLowerCase().includes(needle);
-    })
+    .filter((spot) => !needle || `${spot.name}${spot.area}${spot.category}${spot.note}`.toLocaleLowerCase().includes(needle))
     .slice()
     .sort((a, b) => Number(!inTokyoView(a.lat, a.lng)) - Number(!inTokyoView(b.lat, b.lng)));
 }

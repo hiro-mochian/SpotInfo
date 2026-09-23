@@ -8,13 +8,14 @@
     "build": "vite build && node scripts/prepare-pages.mjs",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
+    "test:firestore": "firebase emulators:exec --config firestore.emulator.json --project spot-info-rules-test --only firestore \"node --test tests/firestore.rules.test.mjs\"",
     "check:independence": "node scripts/check-independence.mjs"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.6",
-    "@supabase/supabase-js": "^2.49.1",
     "@tailwindcss/vite": "^4.3.3",
     "@tanstack/react-query": "^5.66.8",
+    "firebase": "^12.19.0",
     "leaflet": "^1.9.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -25,14 +26,19 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@firebase/rules-unit-testing": "^5.0.2",
     "@types/leaflet": "^1.9.16",
     "@types/node": "^22.13.10",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^6.1.1",
+    "firebase-admin": "^14.4.0",
     "typescript": "^5.7.3",
     "vite": "^8.3.0",
     "vitest": "^5.0.1"
+  },
+  "overrides": {
+    "uuid": "11.1.1"
   },
   "spotRelease": {
     "label": "V01R01",

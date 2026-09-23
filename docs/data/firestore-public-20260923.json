@@ -1,0 +1,116 @@
+{
+  "documents": [
+    {
+      "name": "projects/spot-info/databases/(default)/documents/spots/1",
+      "fields": {
+        "createdAt": {
+          "timestampValue": "2026-09-22T08:24:39Z"
+        },
+        "category": {
+          "stringValue": "公園"
+        },
+        "lng": {
+          "doubleValue": 139.7713
+        },
+        "area": {
+          "stringValue": "東京 台東区"
+        },
+        "note": {
+          "stringValue": "都会の中の自然界隈"
+        },
+        "lat": {
+          "doubleValue": 35.7148
+        },
+        "name": {
+          "stringValue": "上野公園"
+        }
+      },
+      "createTime": "2026-09-23T14:14:14.595984Z",
+      "updateTime": "2026-09-23T14:14:14.595984Z"
+    },
+    {
+      "name": "projects/spot-info/databases/(default)/documents/spots/2",
+      "fields": {
+        "createdAt": {
+          "timestampValue": "2026-09-22T08:24:39Z"
+        },
+        "category": {
+          "stringValue": "公園"
+        },
+        "lat": {
+          "doubleValue": 35.6964
+        },
+        "name": {
+          "stringValue": "錦糸公園"
+        },
+        "lng": {
+          "doubleValue": 139.8153
+        },
+        "area": {
+          "stringValue": "東京都 墨田区"
+        },
+        "note": {
+          "stringValue": "駅に近く、子どもが遊んでいて、休日はフリマも多い"
+        }
+      },
+      "createTime": "2026-09-23T14:14:14.595984Z",
+      "updateTime": "2026-09-23T14:14:14.595984Z"
+    },
+    {
+      "name": "projects/spot-info/databases/(default)/documents/spots/3",
+      "fields": {
+        "lng": {
+          "doubleValue": -83.2342
+        },
+        "lat": {
+          "doubleValue": 42.3031
+        },
+        "category": {
+          "stringValue": "博物館"
+        },
+        "createdAt": {
+          "timestampValue": "2026-09-22T08:24:39Z"
+        },
+        "note": {
+          "stringValue": "素敵な博物館"
+        },
+        "area": {
+          "stringValue": "US ミシガン州"
+        },
+        "name": {
+          "stringValue": "フォード博物館"
+        }
+      },
+      "createTime": "2026-09-23T14:14:14.595984Z",
+      "updateTime": "2026-09-23T14:14:14.595984Z"
+    },
+    {
+      "name": "projects/spot-info/databases/(default)/documents/spots/30001",
+      "fields": {
+        "category": {
+          "stringValue": "温泉"
+        },
+        "createdAt": {
+          "timestampValue": "2026-09-22T13:35:56Z"
+        },
+        "lng": {
+          "doubleValue": 139.7671
+        },
+        "lat": {
+          "doubleValue": 35.6812
+        },
+        "note": {
+          "stringValue": "水着を着て温泉に浸かってチェスを楽しむこともできる"
+        },
+        "area": {
+          "stringValue": "中欧"
+        },
+        "name": {
+          "stringValue": "セーチェーニ温泉 Széchenyi Gyógyfürdő és Uszoda"
+        }
+      },
+      "createTime": "2026-09-23T14:14:14.595984Z",
+      "updateTime": "2026-09-23T14:14:14.595984Z"
+    }
+  ]
+}

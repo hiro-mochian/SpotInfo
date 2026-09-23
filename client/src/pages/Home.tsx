@@ -1,5 +1,5 @@
 import {APP_NAME, RELEASE} from "@/lib/release";
-import { useAuth } from "@/_core/hooks/useAuth";
+import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -135,7 +135,7 @@ type Draft = {
 };
 
 export default function Home() {
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, signOut } = useAuth();
   const [lang, setLang] = useState<"ja" | "en">("ja");
   const t = copy[lang];
   const listQuery = trpc.spots.list.useQuery();
@@ -161,7 +161,7 @@ export default function Home() {
     lat: String(TOKYO_CENTER.lat),
     lng: String(TOKYO_CENTER.lng),
   });
-  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
   const mapRef = useRef<L.Map | null>(null);
 
   const categories = useMemo(() => {
@@ -180,15 +180,15 @@ export default function Home() {
         )
         .slice()
         .sort((a, b) => {
-          const aIn = inTokyoView(Number(a.lat), Number(a.lng)) ? 0 : 1;
-          const bIn = inTokyoView(Number(b.lat), Number(b.lng)) ? 0 : 1;
+          const aIn = inTokyoView(a.lat, a.lng) ? 0 : 1;
+          const bIn = inTokyoView(b.lat, b.lng) ? 0 : 1;
           return aIn - bIn;
         }),
     [spots, category, query]
   );
 
   const nearbyCards = useMemo(
-    () => spots.filter((spot) => inTokyoView(Number(spot.lat), Number(spot.lng))).slice(0, 3),
+    () => spots.filter((spot) => inTokyoView(spot.lat, spot.lng)).slice(0, 3),
     [spots]
   );
 
@@ -267,7 +267,7 @@ export default function Home() {
                 <Link href="/my" className="text-sm hover:text-foreground sm:hidden">
                   {t.mine}
                 </Link>
-                <Button variant="ghost" size="sm" onClick={() => void logout()}>
+                <Button variant="ghost" size="sm" onClick={() => void signOut()}>
                   {t.logout}
                 </Button>
               </>
@@ -342,7 +342,7 @@ export default function Home() {
                 className="block w-full border-b border-border py-3 text-left last:border-0"
                 onClick={() => {
                   setSelectedId(spot.id);
-                  mapRef.current?.panTo({ lat: Number(spot.lat), lng: Number(spot.lng) });
+                  mapRef.current?.panTo({ lat: spot.lat, lng: spot.lng });
                 }}
               >
                 <div className="font-[family-name:var(--font-display)] text-[15px]">{spot.name}</div>
@@ -396,7 +396,7 @@ export default function Home() {
             />
             <p className="absolute bottom-3 left-3 z-10 border border-border bg-[#fbf7ee] px-3 py-1.5 text-xs text-muted-foreground">
               {listQuery.isLoading ? (lang === "ja" ? "読み込み中…" : "Loading…") : listQuery.isError ? (lang === "ja" ? "件数を取得できません" : "Count unavailable") : t.honestCount(spots.length)} ·{" "}
-              {spots.filter((spot) => inTokyoView(Number(spot.lat), Number(spot.lng))).length} {t.inMap}
+              {spots.filter((spot) => inTokyoView(spot.lat, spot.lng)).length} {t.inMap}
             </p>
           </div>
           <aside className="border border-border bg-card p-5">

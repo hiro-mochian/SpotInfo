@@ -1,0 +1,88 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isVerifiedGoogle() {
+      return request.auth != null
+        && request.auth.token.firebase.sign_in_provider == 'google.com'
+        && request.auth.token.email_verified == true;
+    }
+
+    function isStaff() {
+      return isVerifiedGoogle()
+        && (request.auth.token.role == 'owner' || request.auth.token.role == 'admin');
+    }
+
+    function isSpotShape(data) {
+      return data.keys().hasAll(['name', 'area', 'category', 'note', 'lat', 'lng', 'createdAt'])
+        && data.keys().hasOnly(['name', 'area', 'category', 'note', 'lat', 'lng', 'createdAt'])
+        && data.name is string && data.name.size() > 0 && data.name.size() <= 200
+        && data.area is string && data.area.size() > 0 && data.area.size() <= 200
+        && data.category is string && data.category.size() > 0 && data.category.size() <= 100
+        && data.note is string && data.note.size() > 0 && data.note.size() <= 2000
+        && data.lat is number && data.lat >= -90 && data.lat <= 90
+        && data.lng is number && data.lng >= -180 && data.lng <= 180;
+    }
+
+    function ownerPath(spotId) {
+      return /databases/$(database)/documents/spotOwners/$(spotId);
+    }
+
+    function spotPath(spotId) {
+      return /databases/$(database)/documents/spots/$(spotId);
+    }
+
+    function ownsExistingSpot(spotId) {
+      return isVerifiedGoogle()
+        && get(ownerPath(spotId)).data.uid == request.auth.uid;
+    }
+
+    match /spots/{spotId} {
+      allow read: if true;
+
+      // A new public document can only be written alongside its private owner map.
+      allow create: if isVerifiedGoogle()
+        && isSpotShape(request.resource.data)
+        && request.resource.data.createdAt == request.time
+        && getAfter(ownerPath(spotId)).data.keys().hasOnly(['uid'])
+        && getAfter(ownerPath(spotId)).data.uid == request.auth.uid;
+
+      // Coordinates, creation time, and all other public fields are immutable.
+      allow update: if ownsExistingSpot(spotId)
+        && request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['name', 'area', 'category', 'note'])
+        && isSpotShape(request.resource.data);
+
+      // Deleting a public spot must delete its matching private map in the same batch.
+      allow delete: if ownsExistingSpot(spotId)
+        && !existsAfter(ownerPath(spotId));
+    }
+
+    match /spotOwners/{spotId} {
+      // Public clients never read ownership metadata. A member may query only their
+      // own mappings; staff custom claims may read metadata for the admin summary.
+      allow get, list: if isStaff()
+        || (isVerifiedGoogle() && resource.data.uid == request.auth.uid);
+
+      // The pre-write public absence check prevents a user from claiming an imported
+      // legacy spot, including one whose uid is null.
+      allow create: if isVerifiedGoogle()
+        && !exists(spotPath(spotId))
+        && request.resource.data.keys().hasOnly(['uid'])
+        && request.resource.data.uid == request.auth.uid
+        && isSpotShape(getAfter(spotPath(spotId)).data)
+        && getAfter(spotPath(spotId)).data.createdAt == request.time;
+
+      // Owner mappings are intentionally never client-updatable.
+      allow update: if false;
+
+      // A private mapping can only disappear with its current user's public spot.
+      allow delete: if ownsExistingSpot(spotId)
+        && !existsAfter(spotPath(spotId));
+    }
+
+    // Claims/roles are set only by trusted server-side Admin SDK scripts.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

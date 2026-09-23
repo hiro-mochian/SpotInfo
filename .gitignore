@@ -28,3 +28,7 @@ __pycache__/
 # Supabase CLI local project linkage (not application source)
 supabase/.temp/
 supabase/.branches/
+
+# Firebase Emulator local state
+.firebase/
+firebase-debug.log

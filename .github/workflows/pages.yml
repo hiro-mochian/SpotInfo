@@ -1,15 +1,10 @@
-name: Publish Spot_Info to GitHub Pages
+name: Redirect legacy GitHub Pages to Google Hosting
 
 on:
   workflow_dispatch:
     inputs:
       confirm_publication:
-        description: 'Publish Spot_Info publicly'
-        type: boolean
-        required: true
-        default: false
-      preview_release:
-        description: 'Preview with visible incomplete-OAuth notice (security checks stay mandatory)'
+        description: 'Publish the redirect to https://spot-info.web.app/'
         type: boolean
         required: true
         default: false
@@ -25,29 +20,11 @@ jobs:
   build:
     if: ${{ inputs.confirm_publication == true }}
     runs-on: ubuntu-latest
-    env:
-      VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
-      VITE_SUPABASE_PUBLISHABLE_KEY: ${{ vars.VITE_SUPABASE_PUBLISHABLE_KEY }}
-      VITE_BASE_PATH: /SpotInfo/
-      ALLOW_INCOMPLETE_OAUTH: ${{ inputs.preview_release }}
-      VITE_PREVIEW_RELEASE: ${{ inputs.preview_release }}
     steps:
       - uses: actions/checkout@v6
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: npm
-      - run: npm ci
-      - run: npm run typecheck
-      - run: npm test
-      - name: Require live data API and enabled login provider
-        run: node scripts/check-deployment.mjs
-      - run: npm run build
-      - run: npm run check:independence
       - uses: actions/upload-pages-artifact@v4
         with:
-          path: dist
-
+          path: legacy-pages
   deploy:
     needs: build
     runs-on: ubuntu-latest

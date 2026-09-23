@@ -1,13 +1,22 @@
-const configuredUrl = import.meta.env.VITE_SUPABASE_URL?.trim() ?? "";
-const configuredKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim() ?? "";
+const required = {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY?.trim() ?? "",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN?.trim() ?? "",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID?.trim() ?? "",
+  appId: import.meta.env.VITE_FIREBASE_APP_ID?.trim() ?? "",
+};
 
-export const supabaseUrl = configuredUrl;
-export const supabasePublishableKey = configuredKey;
-export const isSupabaseConfigured = Boolean(configuredUrl && configuredKey && !configuredKey.startsWith('sb_secret_'));
+export const firebaseConfig = {
+  ...required,
+  ...(import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID?.trim()
+    ? { messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID.trim() }
+    : {}),
+};
+
+export const isFirebaseConfigured = Object.values(required).every(Boolean);
 
 export function configurationMessage(): string {
-  if (!isSupabaseConfigured) {
-    return "Supabase の公開 URL または publishable key が未設定です。VITE_SUPABASE_URL と VITE_SUPABASE_PUBLISHABLE_KEY を設定してください。";
+  if (!isFirebaseConfigured) {
+    return "Firebase の公開設定が未完了です。VITE_FIREBASE_API_KEY、VITE_FIREBASE_AUTH_DOMAIN、VITE_FIREBASE_PROJECT_ID、VITE_FIREBASE_APP_ID を設定してください。";
   }
   return "";
 }

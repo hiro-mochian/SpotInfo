@@ -13,7 +13,7 @@ export const createSpotSchema = z.object({
 });
 
 export const updateSpotSchema = createSpotSchema.pick({ name: true, area: true, category: true, note: true }).extend({
-  id: z.coerce.number().int().positive(),
+  id: z.string().trim().min(1),
 });
 
 export type CreateSpotInput = z.infer<typeof createSpotSchema>;
